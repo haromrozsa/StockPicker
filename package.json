@@ -6,8 +6,15 @@
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "axios": "0.15.3",
+    "d3": "4.5.0",
+    "jqwidgets-framework": "4.6.0",
     "react": "15.4.2",
     "react-dom": "15.4.2",
+    "react-redux": "5.0.2",
+    "react-stockcharts": "0.6.1",
+    "redux": "3.6.0",
+    "redux-promise": "0.5.3",
     "yahoo-finance": "0.2.16"
   },
   "scripts": {

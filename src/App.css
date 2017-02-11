@@ -22,3 +22,49 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.my-input-group {
+  text-align: left;
+  padding: 20px;
+
+}
+
+.form-group {
+  padding: 5px;
+}
+
+.my-table {
+  padding: 20px 20px 20px 20px;
+  width: 50%;
+  display: inline-block;
+  float: left;
+
+}
+
+#symbolInput {
+  width: 200px;
+}
+
+
+.right-div {
+  float: right;
+  width: 50%;
+  display: inline-block;
+}
+
+.left-div {
+  float: left;
+  width: 50%;
+  display: inline-block;
+}
+
+
+div.react-stockchart {
+  width: 0px !important;
+}
+
+.my-table-padding {
+  font-size: 14px;
+  padding: 4px;
+    text-align: left;
+}
