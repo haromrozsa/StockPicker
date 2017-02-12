@@ -13,6 +13,8 @@ class SearchBar extends Component {
     this.state = {
       symbol: '',
       errorClass: '',
+      lastSymbol: '',
+      sameSymbolWarning: false,
       fromDate: fromDate.toISOString().substring(0, 10),
       toDate: new Date().toISOString().substring(0, 10)};
 
@@ -34,6 +36,10 @@ class SearchBar extends Component {
     this.setState({toDate: event.target.value});
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    //console.log(nextProps);
+  }
+
   onFormSubmit(event) {
     event.preventDefault();
 
@@ -41,8 +47,14 @@ class SearchBar extends Component {
         this.setState({errorClass: 'has-error'});
     } else {
       this.setState({errorClass: ''});
-      this.props.fetchSymbols(this.state.symbol, this.state.fromDate, this.state.toDate);
-      this.props.fetchWeeklySymbols(this.state.symbol, this.state.fromDate, this.state.toDate);
+      if (this.state.lastSymbol === this.state.symbol) {
+        this.setState({ sameSymbolWarning: true});
+      } else {
+        this.props.fetchSymbols(this.state.symbol, this.state.fromDate, this.state.toDate);
+        this.props.fetchWeeklySymbols(this.state.symbol, this.state.fromDate, this.state.toDate);
+        this.setState({lastSymbol: this.state.symbol, sameSymbolWarning: false});
+      }
+
     }
   }
 
@@ -77,13 +89,20 @@ class SearchBar extends Component {
              onChange={this.onToDateChange}/>
          </div>*/}
           <button type="submit" className="btn btn-secondary">Submit</button>
+          {this.props.notFound  && <span className="alert alert-danger">Symbol not found. Please add a valid information</span>}
+          {this.state.sameSymbolWarning && <span className="alert alert-warning">Same symbol. Please add an other</span>}
       </form>
+
     );
   }
+}
+
+function mapStateToProps({symbols}) {
+  return {  notFound: symbols.notFound };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({fetchSymbols, fetchWeeklySymbols }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

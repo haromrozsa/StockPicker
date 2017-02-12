@@ -2,7 +2,7 @@ import { FETCH_SYMBOL, FETCH_WEEKLY_SYMBOL, CHART_RENDERED, WEEKLY_CHART_RENDERE
 import { format } from 'd3-format';
 import _ from 'lodash';
 
-const INITIAL_STATE = { all: { payload : [] }, weekly: { payload : [] }, chartRendered: false, weeklyChartRendered: false };
+const INITIAL_STATE = { all: { payload : [] }, weekly: { payload : [] }, chartRendered: false, weeklyChartRendered: false, notFound: false };
 
 function getDateOneWeekAfter(today) {
 
@@ -35,14 +35,21 @@ function getReturnObject(action, prediction) {
 };
 
 export default function(state = INITIAL_STATE, action) {
+
   switch(action.type.type) {
     case FETCH_SYMBOL:
+      if (_.isEmpty(action.payload)) {
+        return { ...state, notFound: true };
+      }
       var prediction = getPrediction(action.payload);
       prediction.date =  getDateOneMonthAfter(prediction.date);
       action.payload.push(prediction);
-      return { ...state, all: getReturnObject(action, prediction) };
+      return { ...state, all: getReturnObject(action, prediction), notFound: false };
 
     case FETCH_WEEKLY_SYMBOL:
+      if (_.isEmpty(action.payload)) {
+        return { ...state, notFound: true };
+      }
       var predictionWeekly = getPrediction(action.payload);
       predictionWeekly.date =  getDateOneWeekAfter(predictionWeekly.date);
       action.payload.push(predictionWeekly);
@@ -53,7 +60,7 @@ export default function(state = INITIAL_STATE, action) {
 
     case WEEKLY_CHART_RENDERED:
         return { ...state, weeklyChartRendered: action.payload };
-        
+
     default:
       return state;
   }
