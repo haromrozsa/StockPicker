@@ -43,7 +43,7 @@ class CandleStickChart extends React.Component {
       return < div/>;
     }
 		return (
-			<ChartCanvas ratio={200} width={750}  height={700}
+			<ChartCanvas ratio={200} width={700}  height={700}
 					margin={{ left: 50, right: 50, top: 10, bottom: 30 }} type={type}
 					seriesName="MSFT"
 					data={data}

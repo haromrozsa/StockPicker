@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import SearchBar from './components/search_bar';
 import SymbolList from './containers/symbol_list';
+import SplitterLayout from 'react-splitter-layout';
+import StockList from './components/stock_list';
 
 
 class App extends Component {
@@ -31,11 +33,19 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>*/}
-        <div className="App-intro">
-          <SearchBar></SearchBar>
+        <SplitterLayout secondaryInitialSize={1400}>
+          <StockList></StockList>
+          <div className="App-intro">
+            <SearchBar></SearchBar>
+          {/*<div>
+            <div className="my-prediction-left"><Predictions></Predictions></div>
+            <div className="my-prediction-left"><Predictions></Predictions></div>
+          </div>
+          <Predictions></Predictions>*/}
           <SymbolList></SymbolList>
-          {/*}<CandleStickChart data={data} type={type}></CandleStickChart>*/}
         </div>
+      </SplitterLayout>
+
       </div>
     );
   }

@@ -41,8 +41,21 @@
 
 }
 
+.my-prediction-table {
+  padding: 20px;
+  width: 70% !important;
+}
+
+.my-prediction-left {
+  padding: 20px;
+  width: 30%;
+  float: left;
+}
+
 #symbolInput {
   width: 200px;
+  height: 34px;
+    padding: 8px 10px;
 }
 
 .alert {
@@ -70,5 +83,20 @@ div.react-stockchart {
 .my-table-padding {
   font-size: 14px;
   padding: 4px;
-    text-align: left;
+  text-align: left;
+}
+
+.table>thead>tr>th, .table>thead>tr>td, .table>tbody>tr>th, .table>tbody>tr>td, .table>tfoot>tr>th, .table>tfoot>tr>td {
+  padding: 8px 5px !important;
+}
+
+.expander {
+  background-color: #C8C8C8 ;
+  height: 50px;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.stockList div:nth-child(even)  {
+  background-color: #F0F0F0;
 }

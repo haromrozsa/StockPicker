@@ -5,6 +5,9 @@ export const FETCH_WEEKLY_SYMBOL = 'FETCH_WEEKLY_SYMBOL';
 export const CHART_RENDERED = 'CHART_RENDERED';
 export const WEEKLY_CHART_RENDERED = 'WEEKLY_CHART_RENDERED';
 
+export { addStochasticValues, ADD_STOCHASTIC_VALUES } from './predictionAction';
+export { clickOnSymbol, CLICK_ON_SYMBOL } from './stockAction';
+
 export function fetchSymbols(symbol, fromDate, toDate) {
 
   const request = yahooFinance.historical({

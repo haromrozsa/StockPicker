@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import { format } from 'd3-format';
 import {timeFormat} from 'd3-time-format';
+import { connect } from 'react-redux';
+import { bindActionCreators} from 'redux';
+import {addStochasticValues} from '../actions';
 
 class SymbolTable extends Component {
   constructor(props) {
@@ -17,7 +20,14 @@ class SymbolTable extends Component {
     }
 
     return false;
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+  //  console.log(_.reverse(_.takeRight(this.props.symbolValues, 3)));
+    this.props.addStochasticValues(_.reverse(_.takeRight(this.props.symbolValues, 3)), this.props.timeFrame);
+    //_.reverse(_.takeRight(this.props.symbolValues, 3)).map((symbol) => {
+    //  console.log(symbol.fullSTO.K);
+    //});
   }
 
   renderWeather(symbol) {
@@ -51,4 +61,8 @@ class SymbolTable extends Component {
   }
 }
 
-export default SymbolTable;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({addStochasticValues}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(SymbolTable);

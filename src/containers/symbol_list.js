@@ -45,13 +45,19 @@ class SymbolList extends Component {
           <div className="my-table">
             <table className="table table-striped">
               {this.renderHeader()}
-              <SymbolTable symbolValues={this.props.weekly_symbols.payload} chartRendered={this.props.weeklyChartRendered}></SymbolTable>
+              <SymbolTable
+                symbolValues={this.props.weekly_symbols.payload}
+                chartRendered={this.props.weeklyChartRendered}
+                timeFrame={1}></SymbolTable>
             </table>
           </div>
             <div className="my-table">
             <table className="table table-striped">
               {this.renderHeader()}
-              <SymbolTable symbolValues={this.props.symbols.payload} chartRendered={this.props.chartRendered}></SymbolTable>
+              <SymbolTable
+                symbolValues={this.props.symbols.payload}
+                chartRendered={this.props.chartRendered}
+                timeFrame={2}></SymbolTable>
             </table>
           </div>
         </div>

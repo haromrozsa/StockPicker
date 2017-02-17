@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
-import { fetchSymbols, fetchWeeklySymbols } from '../actions/index';
+import { fetchSymbols, fetchWeeklySymbols, clickOnSymbol } from '../actions/index';
 
 class SearchBar extends Component {
   constructor(props) {
@@ -22,6 +22,26 @@ class SearchBar extends Component {
     this.onFromDateChange = this.onFromDateChange.bind(this);
     this.onToDateChange = this.onToDateChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.showStock = this.showStock.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    //console.log(nextProps);
+    //if (nextProps.notFound === true) {
+    //  return;
+    //}
+    if (nextProps.choosedStock !== '') {
+      this.setState({symbol: nextProps.choosedStock}, function() {
+        //this.props.choosedStock = '';
+        this.onFormSubmit();
+      });
+    }
+    //console.log(nextProps);
+
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    //alert('componentWillUpdate');
   }
 
   onInputChange(event) {
@@ -36,12 +56,23 @@ class SearchBar extends Component {
     this.setState({toDate: event.target.value});
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    //console.log(nextProps);
+  showStock(event) {
+    this.setState({symbol: 'RWE.DE'}, function() {
+      this.onFormSubmit();
+    });
+    //alert(this.state.symbol);
+    //this.onFormSubmit(event);
   }
 
   onFormSubmit(event) {
-    event.preventDefault();
+
+
+    //console.log(event);
+    if (event !== undefined) {
+      event.preventDefault();
+    }
+    this.props.clickOnSymbol('');
+    //alert(this.state.symbol);
 
     if (this.state.symbol === '') {
         this.setState({errorClass: 'has-error'});
@@ -60,6 +91,7 @@ class SearchBar extends Component {
 
   render() {
     return (
+      <div>
       <form onSubmit={this.onFormSubmit} className="my-input-group form-inline">
         <div className={`form-group ${this.state.errorClass}` }>
           <label>Ticker:</label>
@@ -91,18 +123,20 @@ class SearchBar extends Component {
           <button type="submit" className="btn btn-secondary">Submit</button>
           {this.props.notFound  && <span className="alert alert-danger">Symbol not found. Please add a valid information</span>}
           {this.state.sameSymbolWarning && <span className="alert alert-warning">Same symbol. Please add an other</span>}
+
       </form>
+    </div>
 
     );
   }
 }
 
-function mapStateToProps({symbols}) {
-  return {  notFound: symbols.notFound };
+function mapStateToProps({symbols, stock}) {
+  return {  notFound: symbols.notFound, choosedStock: stock.choosedStock };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchSymbols, fetchWeeklySymbols }, dispatch);
+  return bindActionCreators({fetchSymbols, fetchWeeklySymbols, clickOnSymbol }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
