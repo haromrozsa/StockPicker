@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators} from 'redux';
-import { fetchSymbols, fetchWeeklySymbols, clickOnSymbol } from '../actions/index';
+import { fetchSymbols, fetchWeeklySymbols, clickOnSymbol, save, deletePrediction } from '../actions/index';
+import { Link} from 'react-router';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
+
+    console.log('constructor called');
 
     var fromDate = new Date();
     fromDate.setFullYear(fromDate.getFullYear() - 1);
@@ -15,6 +18,8 @@ class SearchBar extends Component {
       errorClass: '',
       lastSymbol: '',
       sameSymbolWarning: false,
+      evaluteDisabled: true,
+      evaluteShow: true,
       fromDate: fromDate.toISOString().substring(0, 10),
       toDate: new Date().toISOString().substring(0, 10)};
 
@@ -41,7 +46,7 @@ class SearchBar extends Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    //alert('componentWillUpdate');
+    //console.log(nextProps.ticker);
   }
 
   onInputChange(event) {
@@ -81,12 +86,44 @@ class SearchBar extends Component {
       if (this.state.lastSymbol === this.state.symbol) {
         this.setState({ sameSymbolWarning: true});
       } else {
+        this.props.deletePrediction(this.state.symbol);
         this.props.fetchSymbols(this.state.symbol, this.state.fromDate, this.state.toDate);
         this.props.fetchWeeklySymbols(this.state.symbol, this.state.fromDate, this.state.toDate);
-        this.setState({lastSymbol: this.state.symbol, sameSymbolWarning: false});
+        this.setState({lastSymbol: this.state.symbol, sameSymbolWarning: false, evaluteDisabled: false});
+
       }
 
     }
+  }
+
+  onInputTest = (event) => {
+    alert(this.state.symbol);
+  }
+
+  renderTestButton = () => {
+
+    if(this.state.evaluteShow){
+        return  <button className="btn btn-success" disabled={this.state.evaluteDisabled} id="testButton" onClick={this.evaluateSymbol}>Evaluate</button>
+    }
+
+    return <Link to={"/test/" + this.state.symbol} className="btn btn-success" id="testButton">Show results</Link>
+  }
+
+  evaluateSymbol = (event) => {
+
+    event.preventDefault();
+    this.setState({evaluteDisabled: true});
+
+    this.props.save(this.props.weekly_symbols, this.props.symbols)
+      .then((data) => {
+        console.log(data);
+        setTimeout(() => {
+            this.setState({evaluteShow: false});
+        }, 11000);
+
+      });
+    //event.preventDefault();
+    //window.location.href='/test';
   }
 
   render() {
@@ -121,6 +158,11 @@ class SearchBar extends Component {
              onChange={this.onToDateChange}/>
          </div>*/}
           <button type="submit" className="btn btn-secondary">Submit</button>
+          {this.renderTestButton()}
+          {/*<button className="btn btn-secondary" disabled={this.state.testDisabled} id="testButton"><Link to="/test">
+             Test
+          </Link></button>
+          <button type="button" className="btn btn-secondary"  onClick={this.onInputTest} disabled={this.state.testDisabled}>Test</button>*/}
           {this.props.notFound  && <span className="alert alert-danger">Symbol not found. Please add a valid information</span>}
           {this.state.sameSymbolWarning && <span className="alert alert-warning">Same symbol. Please add an other</span>}
 
@@ -132,11 +174,11 @@ class SearchBar extends Component {
 }
 
 function mapStateToProps({symbols, stock}) {
-  return {  notFound: symbols.notFound, choosedStock: stock.choosedStock };
+  return {  notFound: symbols.notFound, choosedStock: stock.choosedStock, symbols: symbols.all.payload, weekly_symbols: symbols.weekly.payload };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchSymbols, fetchWeeklySymbols, clickOnSymbol }, dispatch);
+  return bindActionCreators({fetchSymbols, fetchWeeklySymbols, clickOnSymbol, save, deletePrediction }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

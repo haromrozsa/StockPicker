@@ -27,31 +27,55 @@ function getPrediction(symbol) {
 };
 
 function getReturnObject(action, prediction) {
+
+  //console.log(JSON.stringify(action.payload));
+  //console.log(action.payload);
+
+  _.map(action.payload, (symbol) => {
+    symbol.date = new Date(symbol.date);
+    //console.log(symbol.date);
+  });
+
   return {
+    //payload : action.payload.data,
     payload : action.payload,
-    fromDate: action.type.fromDate,
-    toDate: prediction.date
+    fromDate: new Date(action.type.fromDate),
+    toDate: new Date(prediction.date)
     }
 };
 
 export default function(state = INITIAL_STATE, action) {
 
+  //console.log(action);
+  //if (action.payload) {
+  //  action.payload = action.payload.data;
+  //}
+
+
   switch(action.type.type) {
     case FETCH_SYMBOL:
+
+      action.payload = action.payload.data;
+
       if (_.isEmpty(action.payload)) {
         return { ...state, notFound: true };
       }
+      //console.log(action);
+
       var prediction = getPrediction(action.payload);
-      prediction.date =  getDateOneMonthAfter(prediction.date);
+      prediction.date =  getDateOneMonthAfter(new Date(prediction.date));
       action.payload.push(prediction);
       return { ...state, all: getReturnObject(action, prediction), notFound: false };
 
     case FETCH_WEEKLY_SYMBOL:
+
+      action.payload = action.payload.data;
+
       if (_.isEmpty(action.payload)) {
         return { ...state, notFound: true };
       }
       var predictionWeekly = getPrediction(action.payload);
-      predictionWeekly.date =  getDateOneWeekAfter(predictionWeekly.date);
+      predictionWeekly.date =  getDateOneWeekAfter(new Date(predictionWeekly.date));
       action.payload.push(predictionWeekly);
       return { ...state, weekly: getReturnObject(action, predictionWeekly) };
 

@@ -100,3 +100,31 @@ div.react-stockchart {
 .stockList div:nth-child(even)  {
   background-color: #F0F0F0;
 }
+
+.expander{
+  border-width:1px;
+  border-bottom-style:solid;
+  border-bottom-color: #D8D8D8;
+}
+
+#testButton {
+  margin: 10px;
+}
+
+#testButton.btn-success {
+  background-color: #6BA583;
+  border-color: #6BA583;
+}
+
+#testResultTable {
+  margin: 10px;
+}
+
+.evaluateTable {
+  font-size: 15px;
+}
+
+.evaluationResults {
+  margin: 10px;
+  font-size: 25px;
+}

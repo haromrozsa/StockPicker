@@ -1,43 +1,10 @@
-import yahooFinance from 'yahoo-finance';
-
-export const FETCH_SYMBOL = 'FETCH_SYMBOL';
-export const FETCH_WEEKLY_SYMBOL = 'FETCH_WEEKLY_SYMBOL';
 export const CHART_RENDERED = 'CHART_RENDERED';
 export const WEEKLY_CHART_RENDERED = 'WEEKLY_CHART_RENDERED';
 
-export { addStochasticValues, ADD_STOCHASTIC_VALUES } from './predictionAction';
-export { clickOnSymbol, CLICK_ON_SYMBOL } from './stockAction';
-
-export function fetchSymbols(symbol, fromDate, toDate) {
-
-  const request = yahooFinance.historical({
-    symbol: symbol,
-    from: '2012-01-01',
-    to: toDate,
-    period: 'm'
-  });
-
-  return {
-    type: { type: FETCH_SYMBOL, fromDate: fromDate, toDate: toDate },
-    payload: request
-  };
-}
-
-export function fetchWeeklySymbols(symbol, fromDate, toDate) {
-
-  const request = yahooFinance.historical({
-    symbol: symbol,
-    from: '2015-01-01',
-    to: toDate,
-    period: 'w'
-    // period: 'd'  // 'd' (daily), 'w' (weekly), 'm' (monthly), 'v' (dividends only)
-  });
-
-  return {
-    type: { type: FETCH_WEEKLY_SYMBOL, fromDate: fromDate, toDate: toDate },
-    payload: request
-  };
-}
+export { addStochasticValues, fetchPrediction, deletePrediction,
+  ADD_STOCHASTIC_VALUES, FETCH_PREDICTION, DELETE_PREDICTION } from './predictionAction';
+export { clickOnSymbol, save, fetchSymbols, fetchWeeklySymbols,
+  CLICK_ON_SYMBOL, SAVE_SYMBOLS, FETCH_SYMBOL, FETCH_WEEKLY_SYMBOL } from './stockAction';
 
 export function renderTable(timeFrame, rendered) {
 

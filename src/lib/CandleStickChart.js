@@ -32,6 +32,12 @@ class CandleStickChart extends React.Component {
 	render() {
 		var { type, data, fromDate, toDate } = this.props;
 
+    var fastSTO = stochasticOscillator()
+			.windowSize(8)
+			.kWindowSize(1)
+			.merge((d, c) => {d.fastSTO = c})
+			.accessor(d => d.fastSTO);
+
     var fullSTO = stochasticOscillator()
 			.windowSize(8)
 			.kWindowSize(3)
@@ -40,14 +46,14 @@ class CandleStickChart extends React.Component {
 			.accessor(d => d.fullSTO);
 
     if (_.isEmpty(data)) {
-      return < div/>;
+      return < div/>; 
     }
 		return (
 			<ChartCanvas ratio={200} width={700}  height={700}
 					margin={{ left: 50, right: 50, top: 10, bottom: 30 }} type={type}
 					seriesName="MSFT"
 					data={data}
-          calculator={[fullSTO]}
+          calculator={[fullSTO, fastSTO]}
 					xAccessor={d => d.date} xScale={scaleTime()}
 					xExtents={[fromDate, toDate]}>
 
