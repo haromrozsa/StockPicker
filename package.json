@@ -5,15 +5,10 @@
   "devDependencies": {
     "react-scripts": "0.8.5"
   },
-  "engines": {
-    "node": "6.9.4"
-  },
   "dependencies": {
     "axios": "0.15.3",
     "d3": "4.5.0",
     "jqwidgets-framework": "4.6.0",
-    "morgan": "1.9.0",
-    "express": "4.14.1",
     "pui-react-expander": "7.5.4",
     "react": "15.4.2",
     "react-dom": "15.4.2",
@@ -26,8 +21,7 @@
     "yahoo-finance": "0.2.16"
   },
   "scripts": {
-    "start-local": "react-scripts start",
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
