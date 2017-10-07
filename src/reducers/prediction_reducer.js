@@ -13,8 +13,8 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, monthlyValues: action.payload };
       }
     case FETCH_PREDICTION:
-      console.log(FETCH_PREDICTION);
-      console.log(action.payload.data.evolutions_results);
+      //console.log(FETCH_PREDICTION);
+      //console.log(action.payload.data.evolutions_results);
       return { ...state, predictions: action.payload.data.predictions, evolutions_results: action.payload.data.evolutions_results }
     default:
       return state;

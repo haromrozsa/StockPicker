@@ -9,13 +9,15 @@ class EvaluationResults extends Component {
     return (
       <div>
         <strong className="evaluationResults">STOCHASTIC: { format(".2f")(this.props.percentage.percentage )}</strong>
+        {/*<strong className="evaluationResults">NEXT STOCHASTIC: {format(".2f")(this.props.percentage.nextPercentage)}</strong>*/}
         <strong className="evaluationResults">BUY-AND-HOLD: {format(".2f")(this.props.percentage.buyandHold)}</strong>
+
       </div>
 
     );
   }
 
-} 
+}
 
 function mapStateToProps({predictions}) {
   return { percentage: predictions.evolutions_results };

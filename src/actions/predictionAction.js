@@ -15,7 +15,7 @@ export function addStochasticValues(values, timeFrame) {
 
 export function fetchPrediction(symbol) {
 
-  console.log('fetchPrediction called');
+  //console.log('fetchPrediction called');
 
   const request = axios.get(`${ROOT_URL}/prediction/${symbol}` );
 
@@ -27,7 +27,7 @@ export function fetchPrediction(symbol) {
 
 export function deletePrediction(symbol) {
 
-  console.log('deletePrediction called');
+  //console.log('deletePrediction called');
 
   const request = axios.delete(`${ROOT_URL}/prediction/${symbol}` );
 

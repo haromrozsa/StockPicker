@@ -86,7 +86,7 @@ class SearchBar extends Component {
       if (this.state.lastSymbol === this.state.symbol) {
         this.setState({ sameSymbolWarning: true});
       } else {
-        this.props.deletePrediction(this.state.symbol);
+        //this.props.deletePrediction(this.state.symbol);
         this.props.fetchSymbols(this.state.symbol, this.state.fromDate, this.state.toDate);
         this.props.fetchWeeklySymbols(this.state.symbol, this.state.fromDate, this.state.toDate);
         this.setState({lastSymbol: this.state.symbol, sameSymbolWarning: false, evaluteDisabled: false});
@@ -117,9 +117,9 @@ class SearchBar extends Component {
     this.props.save(this.props.weekly_symbols, this.props.symbols)
       .then((data) => {
         console.log(data);
-        setTimeout(() => {
+        //setTimeout(() => {
             this.setState({evaluteShow: false});
-        }, 11000);
+        //}, 11000);
 
       });
     //event.preventDefault();
@@ -158,7 +158,7 @@ class SearchBar extends Component {
              onChange={this.onToDateChange}/>
          </div>*/}
           <button type="submit" className="btn btn-secondary">Submit</button>
-          {this.renderTestButton()}
+          {/*this.renderTestButton()}
           {/*<button className="btn btn-secondary" disabled={this.state.testDisabled} id="testButton"><Link to="/test">
              Test
           </Link></button>

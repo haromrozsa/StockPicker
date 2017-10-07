@@ -12,9 +12,10 @@ function getDateOneWeekAfter(today) {
 };
 
 function getDateOneMonthAfter(today) {
-
+  console.log(today);
   var copiedDate = new Date(today.getTime());
-  copiedDate = new Date(copiedDate.getFullYear(), copiedDate.getMonth()+1, 1);
+  copiedDate = new Date(copiedDate.getFullYear(), copiedDate.getMonth()+1, copiedDate.getDate());
+  console.log(copiedDate);
   return copiedDate;
 };
 
@@ -41,6 +42,7 @@ function getReturnObject(action, prediction) {
     payload : action.payload,
     fromDate: new Date(action.type.fromDate),
     toDate: new Date(prediction.date)
+    //toDate: new Date(action.type.fromDate)
     }
 };
 
@@ -56,6 +58,9 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_SYMBOL:
 
       action.payload = action.payload.data;
+
+        console.log('----------------------');
+      //console.log(action.payload);
 
       if (_.isEmpty(action.payload)) {
         return { ...state, notFound: true };

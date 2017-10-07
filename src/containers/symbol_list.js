@@ -62,6 +62,7 @@ class SymbolList extends Component {
           </div>
         </div>
         <div>
+
           <div className="left-div">
             <CandleStickChart
               data={this.props.weekly_symbols.payload}

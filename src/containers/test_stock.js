@@ -48,6 +48,7 @@ renderHeader = () => {
          <th>%</th>
          <th>K</th>
          <th>D</th>
+         <th>Status</th>
          <th>Date</th>
          <th>Close</th>
          <th>Open</th>
@@ -58,6 +59,10 @@ renderHeader = () => {
          <th>D</th>
          <th>Status</th>
          <th>Action</th>
+         {/*<th>next K</th>
+         <th>next D</th>
+         <th>Status</th>
+         <th>Action</th>*/}
        </tr>
      </thead>
    );
@@ -90,7 +95,8 @@ renderHeader = () => {
          <td>{format(".2f")(symbol.weekly_change)}</td>
          <td>{this.renderStochasticK(symbol)}</td>
          <td>{this.renderStochasticD(symbol)}</td>
-         <td>{symbol.monthy_data.weekly_start_date}-{symbol.monthy_data.weekly_end_date}</td>
+         <td>{(symbol.weekly_status)}</td>
+         <td>{timeFormat("%Y-%m-%d")(new Date(symbol.monthy_data.weekly_start_date))}-{timeFormat("%Y-%m-%d")(new Date(symbol.monthy_data.weekly_end_date))}</td>
          <td>{format(".2f")(symbol.monthy_data.weekly_close)}</td>
          <td>{format(".2f")(symbol.monthy_data.weekly_open)}</td>
          <td>{format(".2f")(symbol.monthy_data.weekly_high)}</td>
@@ -100,6 +106,10 @@ renderHeader = () => {
          <td>{format(".2f")(symbol.monthy_data.mondthy_3_smoothed_D)}</td>
          <td>{(symbol.status)}</td>
          <td>{(symbol.action)}</td>
+         {/*<td>{format(".2f")(symbol.next_monthy_data.next_monthly_3_smoothed_K)}</td>
+         <td>{format(".2f")(symbol.next_monthy_data.next_mondthy_3_smoothed_D)}</td>
+         <td>{(symbol.nextStatus)}</td>
+         <td>{(symbol.nextAction)}</td>*/}
        </tr>
    );
 }
@@ -111,7 +121,7 @@ render() {
         <Link to="/" className="btn btn-primary">
            Back
           </Link>
-          <button className="btn btn-secondary" id="saveButton" onClick={() => this.backToSearch()}>Back</button>
+          {/*<button className="btn btn-secondary" id="saveButton" onClick={() => this.backToSearch()}>Back</button>*/}
         </div>
         <EvaluationResults />
         <div>
