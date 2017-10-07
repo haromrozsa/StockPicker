@@ -9,6 +9,7 @@
     "axios": "0.15.3",
     "d3": "4.5.0",
     "jqwidgets-framework": "4.6.0",
+    "morgan": "1.9.0",
     "pui-react-expander": "7.5.4",
     "react": "15.4.2",
     "react-dom": "15.4.2",
@@ -21,7 +22,8 @@
     "yahoo-finance": "0.2.16"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-local": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
