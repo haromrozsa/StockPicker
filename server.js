@@ -10,8 +10,8 @@ app.use(morgan('combined'));
 //app.use(express.static(__dirname));
 
 app.get('*', (req, res) => {
-       res.send('OK');
-    //res.sendFile(path.resolve(__dirname, 'src/index.js'));
+       //res.send('OK');
+    res.sendFile(path.resolve(__dirname, 'src/index.js'));
 });
 
 //Server Setup
