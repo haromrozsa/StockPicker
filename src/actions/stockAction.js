@@ -7,7 +7,7 @@ export const CLICK_ON_SYMBOL = 'CLICK_ON_SYMBOL';
 export const SAVE_SYMBOLS = 'SAVE_SYMBOLS';
 
 //const ROOT_URL = 'http://localhost:3090';
-const ROOT_URL = 'https://seccer-api.herokuapp.com:3090';
+const ROOT_URL = 'https://seccer-api.herokuapp.com';
 
 export function clickOnSymbol(choosedStock) {
   //console.log("clickOnSymbol");

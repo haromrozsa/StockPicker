@@ -4,7 +4,7 @@ export const FETCH_PREDICTION = 'FETCH_PREDICTION';
 export const DELETE_PREDICTION = 'DELETE_PREDICTION';
 
 //const ROOT_URL = 'http://localhost:3090';
-const ROOT_URL = 'https://seccer-api.herokuapp.com:3090';
+const ROOT_URL = 'https://seccer-api.herokuapp.com';
 
 export function addStochasticValues(values, timeFrame) {
   //alert('TEST');
