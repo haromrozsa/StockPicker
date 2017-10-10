@@ -18,11 +18,8 @@ class StockList extends Component {
 
   showStock = (event) => this.props.clickOnSymbol(event.currentTarget.id);
   //this.props.clickOnSymbol(event.currentTarget.textContent);
-  //console.log(event.currentTarget.textContent)
 
   renderTicker = (tickerData) => <div onClick={this.showStock} key={tickerData.ticker} id={tickerData.ticker}><strong>{tickerData.name}</strong></div>;
-  //console.log(tickerData);
-
 
   renderDaxComponents() {
 

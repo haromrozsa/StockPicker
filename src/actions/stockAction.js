@@ -10,8 +10,6 @@ export const SAVE_SYMBOLS = 'SAVE_SYMBOLS';
 const ROOT_URL = 'https://seccer-api.herokuapp.com';
 
 export function clickOnSymbol(choosedStock) {
-  //console.log("clickOnSymbol");
-  //console.log(choosedStock);
   return {
     type: { type: CLICK_ON_SYMBOL },
     payload: choosedStock
@@ -19,8 +17,6 @@ export function clickOnSymbol(choosedStock) {
 }
 
 export function save(weeklySymbols, monthlySymbols) {
-  //console.log('create Symbols ' + weeklySymbols);
-  //console.log(monthlySymbols);
   const request = axios.post(`${ROOT_URL}/save`, { weekly_symbols: weeklySymbols, monthly_symbols: monthlySymbols} );
   return {
     type: SAVE_SYMBOLS,
@@ -32,8 +28,6 @@ export function fetchSymbols(symbol, fromDate, toDate) {
 
   //const request = axios.post(`${ROOT_URL}/symbol`, { symbol: symbol, from: '2006-01-01', to: toDate, period: 'm'} );
   const request = axios.post(`${ROOT_URL}/security/historical/monthly`, { symbol: symbol, from: '2006-01-01', to: toDate, period: 'm'} );
-
-    //alert('FETCHING');
 
   /*const request = yahooFinance.historical({
     symbol: symbol,

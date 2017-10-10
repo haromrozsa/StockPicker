@@ -14,7 +14,6 @@ class SymbolTable extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    //console.log(JSON.stringify(_.last(nextProps.symbols.payload)));
     if (_.last(this.props.symbolValues) !== undefined && _.last(this.props.symbolValues).fullSTO !== undefined) {
       return true;
     }
@@ -23,10 +22,8 @@ class SymbolTable extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-  //  console.log(_.reverse(_.takeRight(this.props.symbolValues, 3)));
     this.props.addStochasticValues(_.reverse(_.takeRight(this.props.symbolValues, 3)), this.props.timeFrame);
     //_.reverse(_.takeRight(this.props.symbolValues, 3)).map((symbol) => {
-    //  console.log(symbol.fullSTO.K);
     //});
   }
 

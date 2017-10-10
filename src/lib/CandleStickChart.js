@@ -15,7 +15,8 @@ var { fitWidth } = helper;
 var { CrossHairCursor, MouseCoordinateX, MouseCoordinateY } = coordinates;
 var { OHLCTooltip, StochasticTooltip, BollingerBandTooltip } = tooltip;
 
-var { stochasticOscillator, macd, heikinAshi, renko, bollingerBand  } = indicator;
+//heikinAshi, renko,
+var { stochasticOscillator, macd, bollingerBand  } = indicator;
 
 class CandleStickChart extends React.Component {
 

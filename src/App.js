@@ -4,7 +4,6 @@ import SearchBar from './components/search_bar';
 import SymbolList from './containers/symbol_list';
 import SplitterLayout from 'react-splitter-layout';
 import StockList from './components/stock_list';
-import Predictions from './containers/predictions';
 
 class App extends Component {
 
